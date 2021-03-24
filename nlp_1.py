@@ -7,7 +7,7 @@ text = "Today is a beautiful day. Tomorrow looks like bad weather."
 
 blob = TextBlob(text)
 
-print(blob)
+# print(blob)
 
 """
 print(blob.sentences)
@@ -32,26 +32,32 @@ for sentence in sentences:
 
 # Try using a different analyzer instead
 
-"""
 from textblob.sentiments import NaiveBayesAnalyzer
 
 blob = TextBlob(text, analyzer=NaiveBayesAnalyzer())
 
-print(blob.sentiment)
+# print(blob.sentiment)
 
+"""
 for sentence in blob.sentences:
     print(sentence.sentiment)
-
+"""
+"""
 print(blob.detect_language())
 
 spanish = blob.translate(to="es")
 
 print(spanish)
+
+german = blob.translate(to="de")
+
+print(german)
 """
 
 # Pluralize and singularize
 from textblob import Word
 
+"""
 index = Word("index")
 
 print(index.pluralize())
@@ -74,3 +80,54 @@ print(word.correct())  # chooses word with the highest confidence value
 sentence = TextBlob("Ths sentense has missplled wrds.")
 
 print(sentence.correct())
+"""
+
+
+"""
+word1 = Word("studies")
+word2 = Word("varieties")
+
+print(word1.lemmatize())
+print(word2.lemmatize())
+"""
+
+"""
+happy = Word("happy")
+
+print(happy.definitions)
+
+print(happy.synsets)
+
+synonyms = set()
+
+for synset in happy.synsets:
+    for lemma in synset.lemmas():
+        print(lemma)
+        print(lemma.name())
+        synonyms.add(lemma.name())
+
+print(synonyms)
+
+kemmas = happy.synsets[0].lemmas()
+print(lemmas)
+
+for lemma in lemmas[0].antonyms():
+    print(lemma.name())
+"""
+
+import nltk
+
+# nltk.download("stopwords")
+from nltk.corpus import stopwords
+
+stops = stopwords.words("english")
+
+# print(stops)
+
+blob = TextBlob("Today is a beautiful day.")
+
+print(blob.words)
+
+cleanlist = [word for word in blob.words if word not in stops]
+
+print(cleanlist)
